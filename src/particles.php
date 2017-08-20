@@ -1,4 +1,9 @@
 <?php 
+/*
+	Particles Divi Tweak
+	version: 1.0.0
+	Divi Tweaks compatible: 1.0.0
+*/
 
 class ParticlesTweak{
 
@@ -8,7 +13,7 @@ class ParticlesTweak{
 		add_action( 'wcdt_init_tweak',array($this,'init'), 10, 3 );
 	}
 	
-	public function add() {
+	public function add($tweak_list) {
 		$tweak_list[$this->slug] = array(
 			'slug'=>$this->slug,
 			'tite'=>'Particles Background',
