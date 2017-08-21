@@ -23,7 +23,7 @@ var src_dir = "src/";
 
 // var build_dir_base = 'E:/Dropbox/DESARROLLO/WebChemistry/TestSite/wordpress/wp-content/plugins/';
 // var build_dir_base = './';
-var build_dir_base = 'E:/Dropbox/DESARROLLO/joannecrowther.com/wordpress/wp-content/plugins/wc-divi-tweaks/tweaks/';
+var build_dir_base = 'E:/Dropbox/DESARROLLO/Wordpress/TEST/wp-content/plugins/wc-divi-tweaks/tweaks/';
 var build_dir = build_dir_base + "particles/";
 
 var script_src = src_dir+'js/*.js';

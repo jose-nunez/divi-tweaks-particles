@@ -11,24 +11,14 @@ particlesJS.load('particles-js', 'particles.json', function() {
 
 /* Otherwise just put the config content (json): */
 
-
 console.log('starting particles');
 
-var ispresent = document.getElementsByClassName('particles_switch');
-
-if(ispresent[0]){ 
+// if(document.getElementsByClassName('particles_switch')[0]){ 
 	var eElements = document.getElementsByClassName('my-super-particle-class');
-
-	for(var i=0;i<eElements.length;i++){
-	iterateONELEMENTS(eElements[i],i+1);
-		
-	}
-
-}
-else console.log('No parent class present');
+	for(var i=0;i<eElements.length;i++)	iterateONELEMENTS(eElements[i],i+1);
+// }else console.log('No parent class present');
 
 function iterateONELEMENTS(eElement,index){
-
 	var newFirstElement = document.createElement('div');
 
 	var elemID = "particles-js-"+index;
@@ -36,7 +26,24 @@ function iterateONELEMENTS(eElement,index){
 	newFirstElement.setAttribute("id",elemID);
 	newFirstElement.className += ' particles-js-container';
 
+
 	eElement.insertBefore(newFirstElement, eElement.firstChild);
+
+	eElement.addEventListener('mousemove',function(evt){
+		// console.log('mirando mirando',evt);
+		// newFirstElement.dispatchEvent(new Event('mousemove'));
+		// newFirstElement.dispatchEvent(evt);
+		// newFirstElement.dispatchEvent(new MouseEvent(evt.type,evt));
+
+		
+		/*var cev = new MouseEvent('mousemove', {bubbles: false, cancelable: false,view:window});
+		cev.pageX = evt.screenX;
+		cev.pageY = evt.screenY;
+		newFirstElement.dispatchEvent(cev);*/
+
+		// jQuery(newFirstElement).trigger(evt);
+	});
+
 
 	particlesJS(elemID, {
 	  "particles": {
