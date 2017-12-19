@@ -28,11 +28,15 @@ class ParticlesTweak{
 			'slug'=>$this->slug,
 			'tite'=>'Particles Background',
 			'description'=>'some weird backgounds',
+			'settings'=>$this->getSettings(),
 		);
 		return $tweak_list;	
 	}
 
 	public function init($tweak_active){
+		// ________________________________________________
+		// ALWAYS CHECK IS THE TWEAK IS ACTIVE!!
+		// ________________________________________________
 		if($tweak_active[$this->slug]){
 			/* Here's all the magic!! */
 			add_shortcode('particles_short',array($this,'shortcode'));
@@ -40,6 +44,17 @@ class ParticlesTweak{
 		}
 	}
 	
+
+	private function getSettings(){
+		return array(
+			array(
+				'name'=>'active_header',
+				'description'=>'Add particles to your DIVI header!',
+				'default'=>false,
+				'type'=>'boolean'
+			)
+		);
+	}
 
 	// INTERNAL FUNCTIONS _______________________________________________
 
@@ -92,7 +107,8 @@ class ParticlesTweak{
 		wp_enqueue_script( 'wc_particles_app', plugin_dir_url( __FILE__ ) . 'js/particles.min.js',array(),false,true);
 		
 		$app_vars = array(
-			'active_header'=>$this->is_active_header(), 
+			'active_header'=>$this->is_active_header(),
+			// 'active_header'=>false,
 		);
 		wp_localize_script('wc_particles_app','app_vars',$app_vars);
 	}
