@@ -11,12 +11,18 @@ particlesJS.load('particles-js', 'particles.json', function() {
 
 /* Otherwise just put the config content (json): */
 
-console.log('starting particles');
 
-// if(document.getElementsByClassName('particles_switch')[0]){ 
-	var eElements = document.getElementsByClassName('my-super-particle-class');
+runParticles();
+
+function runParticles(){
+	var eElements = document.getElementsByClassName('divi-tweak-particles');
+	// if(eElements.length<=0) console.log('No particles class found');
 	for(var i=0;i<eElements.length;i++)	iterateONELEMENTS(eElements[i],i+1);
-// }else console.log('No parent class present');
+	
+	if(app_vars.active_header)
+		iterateONELEMENTS(document.getElementById('main-header'),i+1);
+}
+	
 
 function iterateONELEMENTS(eElement,index){
 	var newFirstElement = document.createElement('div');

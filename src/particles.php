@@ -12,10 +12,16 @@ class ParticlesTweak{
 		add_filter( 'wcdt_add_tweak',array($this,'add'), 10, 3 );
 		add_action( 'wcdt_init_tweak',array($this,'init'), 10, 3 );
 
-		$this->suppported_shortcodes = array(
-			'et_pb_slider',
-		);
+		$this->suppported_class = 'divi-tweak-particles';
+		/*$this->suppported_shortcodes = array(
+			'et_pb_section',
+			'et_pb_row',
+			'et_pb_column',
+			'et_pb_slider','et_pb_accordion',
+		);*/
 	}
+
+	// MAIN PLUGIN HOOKS _______________________________________________
 	
 	public function add($tweak_list) {
 		$tweak_list[$this->slug] = array(
@@ -34,6 +40,10 @@ class ParticlesTweak{
 		}
 	}
 	
+
+	// INTERNAL FUNCTIONS _______________________________________________
+
+
 	public function shortcode($atts, $content=null, $code=""){
 		return 'Particles desde WIC sstm!';
 	}
@@ -46,16 +56,31 @@ class ParticlesTweak{
 	}
 
 	private function should_enqueue(){
-		return $this->has_suppported_shortcode();
+		return false
+			|| $this->has_suppported_shortcode()
+			|| $this->is_class_present()
+			|| $this->is_active_header()
+		;
 	}
 	private function has_suppported_shortcode(){
-		global $post;
+		// ALL SUPPORTED SO FAR!!!!!!!!!!!!!
+		return true;
+		/*global $post;
 		if(!($isPost = is_a( $post, 'WP_Post' ))) return;
 		$resp = false;
 		foreach ($this->suppported_shortcodes as $key => $shortcode) {
 			$resp = $resp || has_shortcode( $post->post_content, $shortcode);
 		}
-		return $resp;
+		return $resp;*/
+	}
+	private function is_class_present(){
+		global $post;
+		if(!($isPost = is_a( $post, 'WP_Post' ))) return;
+		return (is_numeric(strpos($post->post_content,$this->suppported_class)));
+	}
+
+	private function is_active_header(){
+		return true; // CHANGE USING SETTINGS
 	}
 
 	private function enqueue_styles() { 
@@ -65,9 +90,14 @@ class ParticlesTweak{
 	private function enqueue_scripts() { 
 		wp_enqueue_script( 'particles', plugin_dir_url( __FILE__ ) . 'lib/particles.min.js',array(),false,true);
 		wp_enqueue_script( 'wc_particles_app', plugin_dir_url( __FILE__ ) . 'js/particles.min.js',array(),false,true);
+		
+		$app_vars = array(
+			'active_header'=>$this->is_active_header(), 
+		);
+		wp_localize_script('wc_particles_app','app_vars',$app_vars);
 	}
 }
 
-$particles_tweak = new ParticlesTweak();
+new ParticlesTweak();
 
 ?>
