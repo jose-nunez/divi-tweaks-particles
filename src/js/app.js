@@ -61,7 +61,7 @@ function iterateONELEMENTS(eElement,index){
 		  }
 		},
 		"color": {
-		  "value": "#ffffff"
+		  "value": "#ffffff",
 		},
 		"shape": {
 		  "type": "circle",

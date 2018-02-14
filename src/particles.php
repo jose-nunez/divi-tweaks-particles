@@ -95,7 +95,11 @@ class ParticlesTweak{
 	}
 
 	private function is_active_header(){
-		return true; // CHANGE USING SETTINGS
+
+		$options = get_option( 'wc_divi_tweaks_option' );
+
+		return $options['active_header']=='on';
+		// return true; // CHANGE USING SETTINGS
 	}
 
 	private function enqueue_styles() { 
@@ -106,9 +110,9 @@ class ParticlesTweak{
 		wp_enqueue_script( 'particles', plugin_dir_url( __FILE__ ) . 'lib/particles.min.js',array(),false,true);
 		wp_enqueue_script( 'wc_particles_app', plugin_dir_url( __FILE__ ) . 'js/particles.min.js',array(),false,true);
 		
+		$options = get_option( 'wc_divi_tweaks_option' );
 		$app_vars = array(
 			'active_header'=>$this->is_active_header(),
-			// 'active_header'=>false,
 		);
 		wp_localize_script('wc_particles_app','app_vars',$app_vars);
 	}
