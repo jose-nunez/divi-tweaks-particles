@@ -38,7 +38,7 @@ var lib_dir = 'src/lib/';
 var src_dir = "src/";
 
 // var build_dir_base = './';
-var build_dir_base = 'E:/Dropbox/DESARROLLO/Wordpress/TEST/wp-content/plugins/wc-divi-tweaks/tweaks/';
+var build_dir_base = 'dist/';
 var build_dir = build_dir_base + "particles/";
 
 var html_src = src_dir+'**/*.html';
